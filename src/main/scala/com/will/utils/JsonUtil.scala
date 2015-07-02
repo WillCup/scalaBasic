@@ -8,7 +8,7 @@ import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
 /**
- * Created by Administrator on 2015/5/6.
+ * Created by will on 2015/5/6.
  */
 object JsonUtil {
 

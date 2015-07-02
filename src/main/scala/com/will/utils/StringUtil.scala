@@ -13,20 +13,25 @@ object StringUtil {
   }
 
   /**
-   * analyze a string separated by \t, return a list
+   * analyze a string separated by seperator, return a list
    * @param str
    * @return
    */
-  def str2List(str :String): List[String] = {
+  def str2List(seperator: String)(str: String): List[String] = {
     val tmp = new ListBuffer[String]()
-//    var count:Int = 0
-    for (s <- str.split("\t")) {
+    for (s <- str.split(seperator)) {
       tmp.append(s)
-//      println(s)
-//      count +=1
-//      println("count is " + count)
     }
     tmp.toList
   }
 
+  /**
+   * analyze a string separated by \t, return a list
+   */
+  val str2ListByTab = str2List("\t")_
+
+  /**
+   * analyze a string separated by ",", return a list
+   */
+  val str2ListByDou = str2List(",")_
 }
