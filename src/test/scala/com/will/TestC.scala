@@ -70,14 +70,15 @@ class SetSuite extends FunSuite {
 //    assert(lines.size == 1)
     lines.foreach(line => {
       if (line.length > 17) {
-        val json = assertJsonValid(line.substring(17).replace("\\n",",").replace("\\","").replace("\"{","{").replace("}\"","}"))
+        val handledLine: String = line.substring(17).replace("\\n", ",").replace("\\", "").replace("\"{", "{").replace("}\"", "}")
+        println(handledLine)
+        val json = assertJsonValid(handledLine)
         val method: String = extract(json \ "accessMethod")
         val request: String = extract(json \ "request")
         val actions: JValue = assertJsonValid(request)
         val actions_j = extract(actions \ "actions")
         println("----?" + actions_j)
-        val elements: JValue = assertJsonValid(actions_j)
-        val actions1: List[Action] = (actions \ "actions").extract[List[Action]]
+        val actions1: List[Action] = (json \ "request" \ "actions").extract[List[Action]]
         actions1.foreach(l => println(l.action + "\t" + l.meta.orderId))
       } else {
         println("------->" + line)
